@@ -452,11 +452,14 @@ module Axlsx
         v
       when :time
         self.style = STYLE_DATE if self.style == 0
-        if !v.is_a?(Time) && v.respond_to?(:to_time)
-          v.to_time
-        else
+        #This should be configurable or I'm missing the purpose of this.
+        #A dev passing in a time with zone is going to have it converted back to Server's system time
+        #The time zone that the dev intended to pass this in by is then lost.
+        #if !v.is_a?(Time) && v.respond_to?(:to_time)
+        #  v.to_time
+        #else
           v
-        end
+        #end
       when :float
         v.to_f
       when :integer
